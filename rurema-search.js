@@ -32,7 +32,7 @@ if (response.ok) {
     );
     return {
       title: entry.signature,
-      subtitle: entry.summary,
+      subtitle: entry.summary ?? "No summary",
       arg: url,
       url,
     };
