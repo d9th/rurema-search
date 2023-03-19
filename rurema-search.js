@@ -1,4 +1,4 @@
-// rurema search pluing for Alfred
+// rurema search plugin for Alfred
 // rurema API
 // https://docs.ruby-lang.org/ja/search/api:v1/version:3.0.0/query:string/query:length/
 
@@ -17,16 +17,18 @@ const url = new URL(
   `https://docs.ruby-lang.org/ja/search/api:v1/version:${RUBY_VERSION}/${queryByKeyword}`
 );
 
-// url.searchParams.set("query", searchKeyword);
+try {
+  const response = await fetch(url, {
+    redirect: "follow",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-const response = await fetch(url, {
-  redirect: "follow",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+  if (!response.ok) {
+    throw new Error("Failed to fetch");
+  }
 
-if (response.ok) {
   const { entries } = await response.json();
   const resultOfSearch = entries.slice(0, 9).map(entry => {
     let url = entry.documents[0].url.replace(
@@ -47,5 +49,8 @@ if (response.ok) {
   const alfredJson = {
     items: resultOfSearch,
   };
+
   console.log(JSON.stringify(alfredJson));
+} catch (error) {
+  console.error(error);
 }
