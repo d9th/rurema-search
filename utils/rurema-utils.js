@@ -4,8 +4,8 @@
 const RUBY_VERSION = "3.2.0";
 
 function generateQueryByKeyword(keywords) {
-  return keywords.reduce((prev, curr) => {
-    return (prev += `query:${curr}/`);
+  return keywords.reduce((result, word) => {
+    return (result += `query:${word}/`);
   }, "");
 }
 
