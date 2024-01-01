@@ -1,0 +1,63 @@
+//
+// rurema-utils.js
+//
+const RUBY_VERSION = "3.2.0";
+const RUREMA_BASE_URL = "https://rurema.clear-code.com/api:v1";
+
+export type Entry = {
+  signature: string;
+  score: number;
+  metadata: MetaData;
+  summary: string;
+  documents: Document[];
+  related_entries: RelatedEntry[];
+};
+
+type MetaData = {
+  type: string;
+  versions: string[];
+};
+
+type Document = {
+  version: string;
+  url: string;
+  description: string;
+  snippets: string[];
+};
+
+type RelatedEntry = {
+  key: string;
+  label: string;
+  type: string;
+  url: string;
+};
+
+function generateQueryByKeyword(keywords: string[]) {
+  return keywords.reduce((result, word) => {
+    return (result += `query:${word}/`);
+  }, "");
+}
+
+export function generateSearchUrl(
+  keywords: string[],
+  baseUrl = RUREMA_BASE_URL,
+  version = RUBY_VERSION,
+) {
+  const query = generateQueryByKeyword(keywords);
+  const url = new URL(`${baseUrl}/version:${version}/${query}`);
+  return url;
+}
+
+function replaceUrl(url: string) {
+  return url.replace("docs.ruby-lang.org/ja/search/http://", "");
+}
+
+export function createSearchResult(entry: Entry) {
+  const url = replaceUrl(entry.documents[0].url);
+  return {
+    title: entry.signature,
+    subtitle: entry.summary ?? "No summary",
+    arg: url,
+    url,
+  };
+}
