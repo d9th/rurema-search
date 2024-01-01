@@ -1,5 +1,5 @@
-import { createSearchResult } from "../utils/rurema-utils.js";
 import { assertEquals } from "https://deno.land/std@0.138.0/testing/asserts.ts";
+import { createSearchResult } from "../utils/rurema-utils.ts";
 
 const entry = {
   signature: "Array#each -> Enumerator",

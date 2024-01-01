@@ -32,24 +32,14 @@ type RelatedEntry = {
   url: string;
 };
 
-function generateQueryByKeyword(keywords: string[]) {
-  return keywords.reduce((result, word) => {
-    return (result += `query:${word}/`);
-  }, "");
-}
-
 export function generateSearchUrl(
   keywords: string[],
-  baseUrl = RUREMA_BASE_URL,
   version = RUBY_VERSION,
+  baseUrl = RUREMA_BASE_URL,
 ) {
   const query = generateQueryByKeyword(keywords);
   const url = new URL(`${baseUrl}/version:${version}/${query}`);
   return url;
-}
-
-function replaceUrl(url: string) {
-  return url.replace("docs.ruby-lang.org/ja/search/http://", "");
 }
 
 export function createSearchResult(entry: Entry) {
@@ -60,4 +50,14 @@ export function createSearchResult(entry: Entry) {
     arg: url,
     url,
   };
+}
+
+function replaceUrl(url: string) {
+  return url.replace("docs.ruby-lang.org/ja/search/http://", "");
+}
+
+function generateQueryByKeyword(keywords: string[]) {
+  return keywords.reduce((result, word) => {
+    return (result += `query:${word}/`);
+  }, "");
 }
