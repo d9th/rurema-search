@@ -2,7 +2,10 @@ import {
   assertEquals,
   assertInstanceOf,
 } from "https://deno.land/std@0.210.0/assert/mod.ts";
-import { createSearchResult, generateSearchUrl } from "../utils/rurema-utils.ts";
+import {
+  createSearchResult,
+  generateSearchUrl,
+} from "../utils/rurema-utils.ts";
 
 const entry = {
   signature: "Array#each -> Enumerator",
