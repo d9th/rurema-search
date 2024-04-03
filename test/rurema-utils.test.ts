@@ -1,7 +1,4 @@
-import {
-  assertEquals,
-  assertInstanceOf,
-} from "@std/assert";
+import { assertEquals, assertInstanceOf } from "@std/assert";
 import {
   createSearchResult,
   generateSearchUrl,
