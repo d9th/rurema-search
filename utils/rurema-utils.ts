@@ -1,14 +1,14 @@
 //
 // rurema-utils.js
 //
-const RUBY_VERSION = "3.2.0";
+const RUBY_VERSION = "3.3.0";
 const RUREMA_BASE_URL = "https://rurema.clear-code.com/api:v1";
 
 export type Entry = {
   signature: string;
   score: number;
   metadata: MetaData;
-  summary: string;
+  summary: string | null | undefined;
   documents: Document[];
   related_entries: RelatedEntry[];
 };
