@@ -18,11 +18,11 @@ Deno.test("generateSearchUrlは指定したバージョンのURLを返す", () =
 });
 
 Deno.test(
-  "generateSearchUrlはバージョンの指定がない時3.3.0のURLを返す",
+  "generateSearchUrlはバージョンの指定がない時3.3のURLを返す",
   () => {
     const keywords = ["Array", "length"];
     const expectedUrl =
-      "https://rurema.clear-code.com/api:v1/version:3.3.0/query:Array/query:length/";
+      "https://rurema.clear-code.com/api:v1/version:3.3/query:Array/query:length/";
 
     assertEquals(generateSearchUrl(keywords).toString(), expectedUrl);
   },
