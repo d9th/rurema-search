@@ -9,7 +9,11 @@ import {
 
 import { parseArgs } from "@std/cli";
 
-const args = parseArgs(Deno.args);
+const args = parseArgs(Deno.args, {
+  default: {
+    count: 10,
+  },
+});
 const searchKeywords = args._;
 const MAX_RESULTS = args["count"] ?? 10;
 

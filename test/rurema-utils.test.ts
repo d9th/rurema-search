@@ -140,6 +140,16 @@ Deno.test("createSearchResultsは指定された数の検索結果を返す", ()
       subtitle: "各要素に対してブロックを評価します。",
       arg: "https://rurema.clear-code.com/3.2.0/method/Array/i/each.html",
       url: "https://rurema.clear-code.com/3.2.0/method/Array/i/each.html",
+      autocomplete: "Array#each -> Enumerator",
+      action: {
+        url: "https://rurema.clear-code.com/3.2.0/method/Array/i/each.html",
+      },
+      text: {
+        copy: "https://rurema.clear-code.com/3.2.0/method/Array/i/each.html",
+        largetype: "各要素に対してブロックを評価します。",
+      },
+      quicklookurl:
+        "https://rurema.clear-code.com/3.2.0/method/Array/i/each.html",
     },
   ];
 

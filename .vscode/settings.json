@@ -10,5 +10,9 @@
   "deno.codeLens.references": true,
   "deno.codeLens.referencesAllFunctions": true,
   "deno.codeLens.test": true,
-  "circleci.persistedProjectSelection": []
+  "circleci.persistedProjectSelection": [],
+  "cSpell.words": [
+    "largetype",
+    "quicklookurl"
+  ]
 }

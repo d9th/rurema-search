@@ -32,7 +32,7 @@ type RelatedEntry = {
 type SearchResult = ReturnType<typeof createSearchResult>;
 
 function generateSearchUrl(
-  keywords: (string | number)[],
+  keywords: Array<string | number>,
   version = RUBY_VERSION,
   baseUrl = RUREMA_BASE_URL,
 ) {
@@ -44,17 +44,27 @@ function generateSearchUrl(
   return url;
 }
 
-function isListElementsEmpty(arg: (string | number)[]) {
+function isListElementsEmpty(arg: Array<string | number>) {
   return arg.every((v) => !v);
 }
 
 function createSearchResult(entry: Entry) {
   const url = replaceUrl(entry.documents[0].url);
+  const subtitle = entry.summary?.replace(/\n/g, "") ?? "No summary";
   return {
     title: entry.signature,
-    subtitle: entry.summary ?? "No summary",
+    subtitle,
     arg: url,
     url,
+    autocomplete: entry.signature,
+    action: {
+      url,
+    },
+    text: {
+      copy: url,
+      largetype: subtitle,
+    },
+    quicklookurl: url,
   };
 }
 
@@ -62,7 +72,7 @@ function replaceUrl(url: string) {
   return url.replace("docs.ruby-lang.org/ja/search/http://", "");
 }
 
-function generateQueryByKeyword(keywords: (string | number)[]) {
+function generateQueryByKeyword(keywords: Array<string | number>) {
   return keywords.reduce((result: string, word) => {
     return (result += `query:${word}/`);
   }, "");
@@ -96,10 +106,13 @@ async function getEntriesFromResponse(
 ): Promise<Entry[]> {
   const json = await response.json();
   if (!("entries" in json)) {
-    throw new Error("Invalid response format");
+    throw new Error("Invalid json format. entries is not found.");
   }
-  return json.entries as Entry[];
+  return json.entries;
 }
+
+// TODO
+// zodを導入してjsonのバリデーションを行いたい
 
 export {
   createSearchResults,
